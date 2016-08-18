@@ -38,7 +38,7 @@ def print_todo(todo):
     print(todo["body"])
     print()
 
-def show (command):
+def show(command):
     parsed_args = command.split(' ')[1:]
     target = ' '.join(parsed_args)
 
@@ -50,6 +50,9 @@ def show (command):
             if todo["title"] == target:
                 print_todo(todo)
                 return
+        print("Input error. Try again.")
+    except e:
+        print("Invalid input. Try again")
 
 
 print("""
@@ -58,6 +61,8 @@ Just type a command to get started. If you need to know what commands are
 available, just type 'help' or '?'
 """)
 
+todos = []
+
 while True:
     command = input("Command: ")
 
@@ -65,8 +70,8 @@ while True:
         help()
     elif command.startswith("new"):
         todos.append(new(command))
-    elif command == "show":
-        print("Sorry, I can't do that yet.")
+    elif command.startswith("show"):
+        show(command)
     elif command == "list":
         list()
     elif command == "quit" or command == "exit":
