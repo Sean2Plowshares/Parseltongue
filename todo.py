@@ -29,6 +29,28 @@ def list ():
         print("\t", index +1, todo['title'])
         print()
 
+def print_todo(todo):
+    print()
+    print("Title:")
+    print(todo["title"])
+    print()
+    print("Description:")
+    print(todo["body"])
+    print()
+
+def show (command):
+    parsed_args = command.split(' ')[1:]
+    target = ' '.join(parsed_args)
+
+    try:
+        idx = int(target)
+        print_todo(todos[idx -1])
+    except ValueError:
+        for todo in todos:
+            if todo["title"] == target:
+                print_todo(todo)
+                return
+
 
 print("""
 Welcome to Super Todo! This is a CLI to organize your life like it's 1999!
@@ -46,7 +68,7 @@ while True:
     elif command == "show":
         print("Sorry, I can't do that yet.")
     elif command == "list":
-        print("Sorry, I can't do that yet.")
+        list()
     elif command == "quit" or command == "exit":
         print("Thanks for using Super Todo!")
         break
