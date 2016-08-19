@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import json
+import os
 
 def help():
     print("""
@@ -57,8 +59,20 @@ def show(command):
                 print_todo(todo)
                 return
         print("Input error. Try again.")
-    except e:
+    except:
         print("Invalid input. Try again")
+
+def save():
+    with open("saved_todos.txt", "w") as f:
+        j = json.dumps(todos)
+        f.write(j)
+
+def load():
+    try:
+        with open("saved_todos.txt", "r") as todo_load:
+            return json.loads(todo_load.read())
+    except:
+        return ''
 
 
 print("""
@@ -67,7 +81,10 @@ Just type a command to get started. If you need to know what commands are
 available, just type 'help' or '?'
 """)
 
-todos = []
+todos = load()
+
+if todos == '':
+    todos = []
 
 while True:
     command = input("Command: ")
@@ -85,3 +102,4 @@ while True:
         break
     else:
         print("That's not a valid command. Use 'help' or '?' for more info.")
+    save()
