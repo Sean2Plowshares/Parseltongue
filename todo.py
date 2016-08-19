@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
 def help():
-    print("Available commands are new, show, list, and quit.")
+    print("""
+    Available commands are new, show, list, and quit.
+    new <title> - creates a new todo with the title given
+    show <index number / title> - displays the indicated todo title and body
+    list - displays all todo titles and their index numbers
+    quit - exits Super Todo
+    """)
 
 def new(command):
     parsed_args = command.split(' ')[1:]
