@@ -10,3 +10,10 @@ Things for ToDo to do:
 4. list - show all todo names and index numbers
 5. show - show description for indicated todo
 6. save list
+
+Things todo needs to do:
+
+1. save as a method of TodoList into file named "name.json"
+2. load TodoList by name
+3. delete Todo from TodoList
+4. when starting, auto-loads last TodoList I was working on
