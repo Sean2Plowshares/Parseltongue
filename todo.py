@@ -9,13 +9,13 @@ class Todo():
         self.priority = priority
 
     def __repr__(self):
-        return self.title + "\n" + str(self.priority) + "\n\n" + self.description + "\n"
+        return self.title + "\n" + str(self.priority) + "\n" + self.description + "\n"
 
 class TodoList():
     todos = []
     def __init__(self, name):
         self.name = name
-        self.file_name = str(name) + ".json"
+        self.file_name = str(name) + ".txt"
 
     def add_todo(self, todo):
         self.todos.append(todo)
@@ -44,7 +44,7 @@ class TodoList():
             return ''
 
     def save(self):
-        with open("TEST.txt", "w") as f:
+        with open(self.file_name, "w") as f:
             j = json.dumps(self.todos)
             f.write(j)
 
@@ -112,4 +112,4 @@ while True:
         break
     else:
         print("That's not a valid command. Use 'help' or '?' for more info.")
-    tl.save
+    tl.save()
