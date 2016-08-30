@@ -8,6 +8,12 @@ class Todo():
         self.description = description
         self.priority = priority
 
+    # Return the dict representation of this class. The std lib JSON module
+    # cannot serialize a class object, it only does dictionaries which is fine
+    # for our use case since the Todo class is a glorified dictionary.
+    def serialize(self):
+        return self.__dict__
+
     def __repr__(self):
         return self.title + "\n" + str(self.priority) + "\n" + self.description + "\n"
 
@@ -44,8 +50,14 @@ class TodoList():
             return ''
 
     def save(self):
+<<<<<<< HEAD
         with open(self.file_name, "w") as f:
             j = json.dumps(self.todos)
+=======
+        with open("TEST.txt", "w") as f:
+            # Use a list comprehension to "serialize" our todos.
+            j = json.dumps([ t.serialize() for t in self.todos ])
+>>>>>>> c58f953a4021d06221232c54515d83a84404b79b
             f.write(j)
 
 def help():
