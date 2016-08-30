@@ -15,6 +15,7 @@ class TodoList():
     todos = []
     def __init__(self, name):
         self.name = name
+        self.file_name = str(name) + ".json"
 
     def add_todo(self, todo):
         self.todos.append(todo)
@@ -35,9 +36,21 @@ class TodoList():
             r += "\t"+ str(index + 1) + todo.title
         return r
 
+    def load(self):
+        try:
+            with open(nj, r) as todo_load:
+                return json.loads(todo_load.read())
+        except:
+            return ''
+
+    def save(self):
+        with open("TEST.txt", "w") as f:
+            j = json.dumps(self.todos)
+            f.write(j)
+
 def help():
     print("""
-    Available commands are new, show, list, and quit.
+    Available commands are new, show, list, load, and quit.
     new <title> - creates a new todo with the title given
     show <index number / title> - displays the indicated todo title and body
     list - displays all todo titles and their index numbers
@@ -75,18 +88,6 @@ def show(query, todo_list):
     else:
         print(t)
 
-def save():
-    with open("saved_todos.txt", "w") as f:
-        j = json.dumps(todos)
-        f.write(j)
-
-def load():
-    try:
-        with open("saved_todos.txt", "r") as todo_load:
-            return json.loads(todo_load.read())
-    except:
-        return ''
-
 print("""
 Welcome to Super Todo! This is a CLI to organize your life like it's 1999!
 Just type a command to get started. If you need to know what commands are
@@ -111,4 +112,4 @@ while True:
         break
     else:
         print("That's not a valid command. Use 'help' or '?' for more info.")
-    save()
+    tl.save
