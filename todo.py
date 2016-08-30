@@ -42,23 +42,19 @@ class TodoList():
             r += "\t"+ str(index + 1) + todo.title
         return r
 
-    def load(self):
-        try:
-            with open(nj, r) as todo_load:
-                return json.loads(todo_load.read())
-        except:
-            return ''
-
     def save(self):
-<<<<<<< HEAD
         with open(self.file_name, "w") as f:
-            j = json.dumps(self.todos)
-=======
-        with open("TEST.txt", "w") as f:
             # Use a list comprehension to "serialize" our todos.
             j = json.dumps([ t.serialize() for t in self.todos ])
->>>>>>> c58f953a4021d06221232c54515d83a84404b79b
             f.write(j)
+
+def last_used():
+    try:
+        with open("last_used_list.txt", "r") as todo_load:
+            return json.loads(todo_load.read())
+    except:
+        return "default"
+
 
 def help():
     print("""
@@ -106,7 +102,7 @@ Just type a command to get started. If you need to know what commands are
 available, just type 'help' or '?'
 """)
 
-tl = TodoList("Default")
+tl = TodoList(last_used())
 
 while True:
     command = input("Command: ")
@@ -119,6 +115,8 @@ while True:
         show(parse_args(command), tl)
     elif command == "list":
         list(tl)
+    elif command.startswith("load"):
+        load(parse_args(command), tl)
     elif command == "quit" or command == "exit":
         print("Thanks for using Super Todo!")
         break
